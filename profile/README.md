@@ -40,8 +40,9 @@ you already use; nothing else in your application changes.
 - **Integrations**: blocking libraries made cooperative, built only on the api so they work under
   every loop at once, with native drivers where a runtime has one.
   [`curl`](https://github.com/fiber-interop/curl) (`async\curl\exec()` with `curl_exec()`'s contract)
-  and [`guzzle`](https://github.com/fiber-interop/guzzle) (a Guzzle handler on top of it) are
-  available; `mysqli_query`, `pg_query` and others are coming.
+  and [`guzzle`](https://github.com/fiber-interop/guzzle) (a Guzzle handler on top of it)
+  and [`pg`](https://github.com/fiber-interop/pg) (`async\pg\query()` with `pg_query()`'s contract) are
+  available; `mysqli_query` and others are coming.
 
 ## What this is not
 
