@@ -37,8 +37,11 @@ you already use; nothing else in your application changes.
 - **Scope**: the identity of the operation code belongs to, an HTTP request or a job, preserved
   across fibers and generators. Proposed for PHP core in the *Scope RFC*; available today as an
   extension (`ext-scope`) with a userland polyfill (`scope`) for installs without it.
-- **Integrations** (coming): `curl_exec`, `mysqli_query`, `pg_query` and others as cooperative
-  functions built only on the api, so they work under every loop at once.
+- **Integrations**: blocking libraries made cooperative, built only on the api so they work under
+  every loop at once, with native drivers where a runtime has one.
+  [`curl`](https://github.com/fiber-interop/curl) (`async\curl\exec()` with `curl_exec()`'s contract)
+  and [`guzzle`](https://github.com/fiber-interop/guzzle) (a Guzzle handler on top of it) are
+  available; `mysqli_query`, `pg_query` and others are coming.
 
 ## What this is not
 
