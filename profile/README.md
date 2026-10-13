@@ -31,6 +31,9 @@ you already use; nothing else in your application changes.
 - **Scope**: the identity of the operation code belongs to, an HTTP request or a job, preserved
   across fibers and generators. Proposed for PHP core in the *Scope RFC*; available today as an
   extension (`ext-scope`) with a userland polyfill (`scope`) for installs without it.
+- **Wanted**: an adapter for Swoole / OpenSwoole. It is possible (coroutines, channels and
+  `waitEvent` map onto the api) but needs its own scope tracking, since Swoole coroutines are not
+  PHP fibers. Best written by someone who runs Swoole; the conformance suite says when it is right.
 - **Integrations** (coming): `curl_exec`, `mysqli_query`, `pg_query` and others as cooperative
   functions built only on the api, so they work under every loop at once.
 
