@@ -26,8 +26,8 @@ you already use; nothing else in your application changes.
 - **`api`**: `go`, `await`, `await_all`, `await_any`, `run`, `sleep`, `readable`, `writable`;
   an adapter interface; two exception interfaces (`CancelledException`, `TimeoutException`) that
   loops implement on their existing classes. Frozen after 1.0.
-- **Adapters**: one package per runtime (`phasync`, `revolt`, `amp`, `react`, `swoole` in
-  progress; TrueAsync when it ships), each certified by the same conformance suite: identical
+- **Adapters**: one package per runtime (`phasync`, `revolt`, `amp`, `react`, `swoole`, which
+  also covers OpenSwoole; TrueAsync when it ships), each certified by the same conformance suite: identical
   output, or it does not ship. A library written against the api reaches the users of every
   runtime that has an adapter, which is the reason the adapters exist.
 - **Scope**: the identity of the operation code belongs to, an HTTP request or a job, preserved
@@ -59,9 +59,9 @@ you already use; nothing else in your application changes.
 
 ## Status
 
-Early. The api, the Scope extension and polyfill, and adapters for phasync, Revolt, AMPHP and
-ReactPHP exist and pass the conformance suite (one known gap on phasync, tracked). Nothing is
-tagged yet. Read `api/README.md` for the specification, and an adapter's README for how it maps.
+Early, 0.1. The api, the Scope extension and polyfill, and adapters for AMPHP, phasync, ReactPHP,
+Revolt, Swoole and OpenSwoole are on Packagist and pass the whole conformance suite; the matrix at
+https://fiber-interop.github.io/conformance.html is rebuilt daily. Read `api/README.md` for the specification, and an adapter's README for how it maps.
 
 Issues and pull requests are welcome in each repository. Maintainers of event loops: if you want
 to own the adapter for your loop, open an issue in it and say so.
