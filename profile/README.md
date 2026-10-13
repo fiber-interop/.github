@@ -26,14 +26,13 @@ you already use; nothing else in your application changes.
 - **`api`**: `go`, `await`, `await_all`, `await_any`, `run`, `sleep`, `readable`, `writable`;
   an adapter interface; two exception interfaces (`CancelledException`, `TimeoutException`) that
   loops implement on their existing classes. Frozen after 1.0.
-- **Adapters**: one package per loop (`phasync`, `revolt`, `amp`, `react`), each certified by the
-  same conformance suite: identical output, or it does not ship.
+- **Adapters**: one package per runtime (`phasync`, `revolt`, `amp`, `react`, `swoole` in
+  progress; TrueAsync when it ships), each certified by the same conformance suite: identical
+  output, or it does not ship. A library written against the api reaches the users of every
+  runtime that has an adapter, which is the reason the adapters exist.
 - **Scope**: the identity of the operation code belongs to, an HTTP request or a job, preserved
   across fibers and generators. Proposed for PHP core in the *Scope RFC*; available today as an
   extension (`ext-scope`) with a userland polyfill (`scope`) for installs without it.
-- **Wanted**: an adapter for Swoole / OpenSwoole. It is possible (coroutines, channels and
-  `waitEvent` map onto the api) but needs its own scope tracking, since Swoole coroutines are not
-  PHP fibers. Best written by someone who runs Swoole; the conformance suite says when it is right.
 - **Integrations** (coming): `curl_exec`, `mysqli_query`, `pg_query` and others as cooperative
   functions built only on the api, so they work under every loop at once.
 
