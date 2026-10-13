@@ -6,17 +6,21 @@ PHP has fibers since 8.1, and several good event loops built on them: AMPHP, Rea
 phasync. Each one has its own way to start a task, wait for it, sleep, and wait for a stream. A
 library that wants to be asynchronous today picks one loop and loses the users of the others.
 
-fiber-interop is the small layer that removes that choice. Six functions, one adapter per loop,
-and a conformance suite that every adapter must pass identically:
+fiber-interop is the small layer that removes that choice. A handful of functions, one adapter per
+runtime, and a conformance suite that every adapter must pass identically:
 
 ```php
-use function async\{go, await, sleep};
+use function async\{run, go, await_all};
 
-$a = go(fn() => fetch('https://example.com/a'));
-$b = go(fn() => fetch('https://example.com/b'));
-
-[$ra, $rb] = await_all([$a, $b]);
+[$a, $b] = run(function () {
+    $a = go(fn() => fetch('https://example.com/a'));
+    $b = go(fn() => fetch('https://example.com/b'));
+    return await_all([$a, $b]);
+});
 ```
+
+`run()` is the only entry point: it guarantees the event loop is running for the code inside it and
+returns when that code and everything it started have finished.
 
 The same code runs unchanged on each supported loop. Install the api and the adapter for the loop
 you already use; nothing else in your application changes.
@@ -49,9 +53,10 @@ you already use; nothing else in your application changes.
 1. **The surface is small and stops growing.** A standard that changes is not one.
 2. **Semantics are tested, not described.** Every rule in the specification is a runnable example
    with expected output. Adapters are certified by running them.
-3. **Interoperability without coordination.** A suspension primitive asked to park a fiber it does
-   not own runs its own loop in place. Two loops that both follow this work together without
-   either knowing the other exists.
+3. **Interoperability by convention, not by a shared scheduler.** A suspension primitive asked to
+   park a fiber it does not own runs its own loop in place instead. Loops that follow this rule
+   work together. Today's loops were not built for it, so each adapter needs one small addition
+   from its runtime, named in that adapter's README; until then the adapters make do, and say how.
 4. **Existing code keeps its behaviour.** Nothing here changes what a program does when it does
    not use it. That applies to the Scope RFC as well: code outside a scope sees what it sees today.
 5. **Owned by the loops it serves.** Adapters are meant to be maintained by the projects they
