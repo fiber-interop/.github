@@ -45,6 +45,7 @@ you already use; nothing else in your application changes.
   and [`mysqli`](https://github.com/fiber-interop/mysqli) (`async\mysqli\query()` with `$m->query()`'s
   contract)
   and [`process`](https://github.com/fiber-interop/process) (`async\process\run()` over `proc_open()`)
+  and [`predis`](https://github.com/fiber-interop/predis) (`async\predis\client()` over Predis)
   are all available.
 
 ## What this is not
