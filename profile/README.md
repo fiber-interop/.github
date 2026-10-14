@@ -41,8 +41,9 @@ you already use; nothing else in your application changes.
   every loop at once, with native drivers where a runtime has one.
   [`curl`](https://github.com/fiber-interop/curl) (`async\curl\exec()` with `curl_exec()`'s contract)
   and [`guzzle`](https://github.com/fiber-interop/guzzle) (a Guzzle handler on top of it)
-  and [`pg`](https://github.com/fiber-interop/pg) (`async\pg\query()` with `pg_query()`'s contract) are
-  available; `mysqli_query` and others are coming.
+  and [`pg`](https://github.com/fiber-interop/pg) (`async\pg\query()` with `pg_query()`'s contract)
+  and [`mysqli`](https://github.com/fiber-interop/mysqli) (`async\mysqli\query()` with `$m->query()`'s
+  contract) are all available.
 
 ## What this is not
 
