@@ -43,7 +43,9 @@ you already use; nothing else in your application changes.
   and [`guzzle`](https://github.com/fiber-interop/guzzle) (a Guzzle handler on top of it)
   and [`pg`](https://github.com/fiber-interop/pg) (`async\pg\query()` with `pg_query()`'s contract)
   and [`mysqli`](https://github.com/fiber-interop/mysqli) (`async\mysqli\query()` with `$m->query()`'s
-  contract) are all available.
+  contract)
+  and [`process`](https://github.com/fiber-interop/process) (`async\process\run()` over `proc_open()`)
+  are all available.
 
 ## What this is not
 
